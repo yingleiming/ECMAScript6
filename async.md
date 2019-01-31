@@ -78,7 +78,7 @@ async function fn() {
 console.log(fn());//Promise 返回的是一个Promise对象
 ```
 
-使用throw Error()捕获错误
+使用throw Error()捕获错误。**推荐使用catch**
 
 ```js
 async function fn() {
@@ -89,5 +89,77 @@ fn().then(res=>{
 },err=>{
     console.log(err);//Error: 出错了
 })
+//以下这种方法更常用：
+async function fn() {
+    throw Error("出错了");
+}
+fn().then(res=>{
+    console.log(res);
+}).catch(err=>{
+    console.log(err);//Error: 出错了
+})
+```
+
+验证 await语句后面Promise状态变成reject，那么整个async函数就会中断执行。
+
+```js
+async function fn() {
+    await Promise.reject("出现问题了")
+}
+fn().then(res=>{
+    console.log(res);
+}).catch(err=>{
+    console.log(err);//出现问题了
+})
+```
+
+------
+
+如何解决async函数中抛出错误，影响代码执行的问题。使用try...catch
+
+```js
+async function fn() {
+    try{
+        await Promise.reject("出现问题了")
+    }catch (e) {
+        let a = await Promise.resolve("success");
+        console.log(a);
+    }
+
+}
+
+fn().then(res=>{
+    console.log(res);//success
+}).catch(err=>{
+    console.log(err);
+})
+```
+
+如何解决async函数中抛出错误，影响代码执行的问题。使用Promise自带的catch。
+
+```js
+async function fn() {
+    await Promise.reject("出现问题了").catch(err=>{
+        console.log(err);//出现问题了
+    });
+    let a = await Promise.resolve("success");
+    console.log(a);
+}
+
+fn().then(res=>{
+    console.log(res);//success
+});
+```
+
+**建议：任何用到await地方，都要使用try catch 掉，保证代码优雅**
+
+```js
+try{
+    let f1 = await readFile("data/a.txt");
+    let f2 = await readFile("data/b.txt");
+    let f3= await readFile("data/c.txt");
+}catch(e){
+    
+}
 ```
 
