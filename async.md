@@ -78,3 +78,16 @@ async function fn() {
 console.log(fn());//Promise 返回的是一个Promise对象
 ```
 
+使用throw Error()捕获错误
+
+```js
+async function fn() {
+    throw Error("出错了");
+}
+fn().then(res=>{
+    console.log(res);
+},err=>{
+    console.log(err);//Error: 出错了
+})
+```
+
