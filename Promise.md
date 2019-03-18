@@ -68,7 +68,7 @@ let promise = new Promise(function(resolve,reject){
     }
 });
 
-//    Promise.then(success,faile);
+//Promise.then(success,faile);
 promise.then(res=>{
     console.log(res);
 },err=>{
