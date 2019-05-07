@@ -2,3 +2,16 @@ javascript函数对参数的值没有进行任何的检查。
 javascript函数的参数与大多数其他语言的函数参数有所不同。
 函数不介意传进来多少个参数，也不在乎传进来的参数是什么数据类型。
 甚至可以不传参数。
+
+arguments：参数
+在javascript函数中，并未指定函数形参的类型；在函数调用时也未对传入的实参做任何的类型检查。
+实际上，javascript函数调用不检查传入形参的个数。
+请看以下实例：
+    function add(x) {
+        return x+1;
+    }
+    console.log(add(1));//输出数字 2
+    console.log(add("1"));//输出字符串 "11"
+    console.log(add());//输出 NaN
+    console.log(add(1,2));//输出 2
+

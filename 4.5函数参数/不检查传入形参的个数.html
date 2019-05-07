@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>不检查传入形参的个数</title>
+</head>
+<body>
+
+<script>
+    function add(x) {
+        return x+1;
+    }
+    console.log(add(1));//输出数字 2
+    console.log(add("1"));//输出字符串 "11"
+    console.log(add());//输出 NaN
+    console.log(add(1,2));//输出 2
+</script>
+</body>
+</html>
