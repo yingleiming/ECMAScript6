@@ -15,3 +15,18 @@ arguments：参数
     console.log(add());//输出 NaN
     console.log(add(1,2));//输出 2
 
+同名形参
+在非严格模式下，一个函数中可以出现多个同名形参，但函数只能访问最后出现的那个同名形参。
+请看以下实例：
+    function add(x,x,x) {
+        return x+1;
+    }
+    console.log(add(1,2,3));//输出 4
+在严格模式下，一个函数中出现同名形参时，会抛出语法错误
+请看以下实例：
+    function des(x,x,x) {
+        "use strict"
+        return x+1;
+    }
+    console.log(des(1,2,3));
+    //抛出错误 Uncaught SyntaxError: Duplicate parameter name not allowed in this context

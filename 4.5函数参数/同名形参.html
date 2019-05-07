@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>同名形参</title>
+</head>
+<body>
+
+<script>
+    function add(x,x,x) {
+        return x+1;
+    }
+    console.log(add(1,2,3));//输出 4
+
+    function des(x,x,x) {
+        "use strict"
+        return x+1;
+    }
+    console.log(des(1,2,3));
+    //抛出错误 Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+</script>
+</body>
+</html>
