@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>参数个数</title>
+</head>
+<body>
+<script>
+    function add(x,y,z) {
+        // console.log(x,y,z)
+        return x+y+z;
+    };
+    let sum = add(1,2,3);
+    console.log(sum);
+    add(1,2,3);//输出 1 undefined undefined
+
+    function shift(x,y) {
+        y = y || 2;
+        console.log(x,y);//输出 1 2
+    };
+    shift(1);
+    shift(1,3);//输出 1 3
+
+
+</script>
+</body>
+</html>
