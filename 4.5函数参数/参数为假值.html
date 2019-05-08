@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>参数为假值</title>
+</head>
+<body>
+<script>
+    function shift(x,y) {
+        y = y || 2;
+        console.log(x,y);
+    };
+    shift(1,0);//输出 1 2
+    shift(1,undefined);//输出 1 2
+    shift(1,false);//输出 1 2
+    shift(1,-0);//输出 1 2
+    shift(1,null);//输出 1 2
+    shift(1,NaN);//输出 1 2
+</script>
+</body>
+</html>
