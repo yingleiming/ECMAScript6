@@ -44,7 +44,8 @@ arguments：参数
     };
     shift(1);//输出 1 2
     shift(1,3);//输出 1 3
-注意：使用 y||2 是不严谨的，显示的设置假值（undefined、null、false、0、-0、NaN）也会得到相同的结果。
+注意：使用 y||2 是不严谨的，显示的设置假值（undefined、null、false、0、-0、""、''、NaN）也会得到相同的结果。
+所以要根据实际场景合理设置。
 请看以下实例：
     function shift(x,y) {
         y = y || 2;
@@ -56,3 +57,33 @@ arguments：参数
     shift(1,-0);//输出 1 2
     shift(1,null);//输出 1 2
     shift(1,NaN);//输出 1 2
+当实参比函数声明的形参多的时候，剩下的实参没有办法直接获得，需要使用即将提到的arguments对象。
+先来看看arguments对象是个啥？
+arguments对象再JS中算是比较特殊的对象。不能显示的创建，只能再函数调用的时候才能使用，长的有点像数组，但绝对不是Array
+的实例。
+请看以下实例：
+    function test1() {
+       console.log(arguments);
+    }
+    test1();//输出 Arguments [callee: ƒ, Symbol(Symbol.iterator): ƒ]
+
+    function test2() {
+        console.log(test2.arguments);
+    }
+    test2(1,2);//输出 Arguments(2) [1, 2, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+
+    function test3() {
+        console.log(arguments.length);//输出 2
+    }
+    test3(1,2);
+
+    function test4() {
+        console.log(arguments[0]);//输出 1
+        console.log(arguments[1]);//输出 2
+    }
+    test4(1,2);
+arguments对象的长度不是有形参个数控制的而是由实参个数控制的。形参是函数内部重新开辟的内存空间存储的变量。对于arguments和
+值都存再的情况下，两者值是同步的。若其中一个无值，则不会同步。
+请看以下实例：
+
+

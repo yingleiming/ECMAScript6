@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实参形参不同步</title>
+</head>
+<body>
+<script>
+    function f(a,b,c) {
+        console.log(arguments[0]);//输出 1
+        var a = 100;
+        console.log(arguments[0]);//输出 100
+
+        console.log(arguments.length);//输出 2
+        arguments[0] = 200;
+        console.log(arguments[0]);
+    }
+    f(1,2);
+</script>
+</body>
+</html>
