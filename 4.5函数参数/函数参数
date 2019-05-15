@@ -104,6 +104,93 @@ arguments对象的length属性显示实参的个数。函数的length属性显�
     }
     console.log(add(1,2));//3
 
-ECMAScript中所有函数的参数都是按值传递的。就像把值从一个变量复制到另一个变量一样。（单独分析）
+内部属性 callee
+arguments有一个叫callee的内部属性，该属性是一个指针，指向拥有这个arguments对象的函数。
+请看以下是一个阶乘实例：
+    function factorial(num){
+        if(num<=1){
+            return 1;
+        }else {
+            return num*factorial(num-1)
+        }
+    };
+    console.log(factorial(5));//120
+但是上面这个函数的执行与函数名紧紧的耦合在了一起，可以使用arguments.callee消除函数解耦。
+    function factorial(num){
+        if(num<=1){
+            return 1;
+        }else {
+            return num*arguments.callee(num-1)
+        }
+    };
+    console.log(factorial(5));
+但在严格模式下，使用arguments.callee会报出TypeError错误:
+    function factorial(num){
+        "use strict";
+        if(num<=1){
+            return 1;
+        }else {
+            return num*arguments.callee(num-1)
+        }
+    };
+    console.log(factorial(5));
+    //Uncaught TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them
+这时，可以使用具名的函数表达式来解决这个问题。
+    var factorial = function fn(num){
+        "use strict";
+        if(num<=1){
+            return 1;
+        }else {
+            return num*fn(num-1)
+        }
+    };
+    console.log(factorial(5));//120
+
+函数重载：
+javascript函数不能像传统意义上那样实现函数重载。而在其他语言中，可以未一个函数编写两个定义，只要这两个定义的签名（接受的参数的
+类型和数量）不同即可。
+javascript没有函数签名，因为其参数是由包含0或多个值的数组来表示的。而没有函数签名，真正意义上的函数重载是不可能做到的。
+请看以下实例：
+    //后面的声明覆盖了前面的声明
+    function addNumber(num){
+        return num + 100;
+    }
+    console.log(addNumber(100));//300
+    function  addNumber(num) {
+        return num +200;
+    }
+    console.log(addNumber(100));//300
+只能通过检查传入的参数的类型和数量并作出不同的反应，来模拟函数的重载:
+    //模拟函数重载 通过判断传入参数的类型和数量，来模拟函数的重载
+    function doAdd(){
+        if(arguments.length==1){
+            console.log(arguments[0] + 10);
+        }else if(arguments.length==2){
+            console.log(arguments[0] + arguments[1]);
+        }
+    }
+    doAdd(10);//20
+    doAdd(10,20);//30
+
+javascript中所有函数的参数都是按值传递的,也就是说把函数外部的值复制给函数内部的参数，就是把值从一个变量复制给另一个变量。
+1】基本类型值
+在向参数传递基本类型的值时，被传递的值会被复制给一个局部变量（命名参数或arguments对象的一个元素）。
+    function addTen(num) {
+        return num + 10;
+    };
+    var count = 20;
+    console.log(count);//20 没有变化
+    var result = addTen(20);////按值传递 num = count
+    console.log(result);//30
+2】引用类型的值
+在向参数传递引用类型的值时，会把这个值在内存中的地址复制给一个局部变量，因此这个局部变量的变化会影响到外部。
+请看以下实例：
+    function setName(obj){
+        obj.name = "Nicholas";
+    }
+    var person  = new Object();
+    setName(person );//obj = person
+    console.log(person.name);// "Nicholas"
+
 
 

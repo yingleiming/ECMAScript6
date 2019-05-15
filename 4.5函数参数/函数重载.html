@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数重载</title>
+</head>
+<body>
+<script>
+    //后面的声明覆盖了前面的声明
+    function addNumber(num){
+        return num + 100;
+    }
+    console.log(addNumber(100));//300
+    function  addNumber(num) {
+        return num +200;
+    }
+    console.log(addNumber(100));//300
+
+    //模拟函数重载 通过判断传入参数的类型和数量，来模拟函数的重载
+    function doAdd(){
+        if(arguments.length==1){
+            console.log(arguments[0] + 10);
+        }else if(arguments.length==2){
+            console.log(arguments[0] + arguments[1]);
+        }
+    }
+    doAdd(10);//20
+    doAdd(10,20);//30
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

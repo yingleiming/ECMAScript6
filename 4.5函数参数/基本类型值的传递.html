@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基本类型值的传递</title>
+</head>
+<body>
+<script>
+    function addTen(num) {
+        return num + 10;
+    };
+    var num = 20;
+    console.log(num);//20
+    var result = addTen(20);
+    console.log(result);//30
+
+    var a = 10
+    function add(num){
+        num+=10
+    }
+    console.log(add(a))
+    console.log(a)
+</script>
+</body>
+</html>
