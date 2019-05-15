@@ -82,8 +82,28 @@ arguments对象再JS中算是比较特殊的对象。不能显示的创建，只
         console.log(arguments[1]);//输出 2
     }
     test4(1,2);
-arguments对象的长度不是有形参个数控制的而是由实参个数控制的。形参是函数内部重新开辟的内存空间存储的变量。对于arguments和
-值都存再的情况下，两者值是同步的。若其中一个无值，则不会同步。
+javascript中的参数在内部是使用一个数组来表示的。函数接收到的始终都是这个数组，而不关心数组中包含了哪些参数。在函数体内可以
+通过arguments对象来访问来访问这个参数数组，从而获取传递给函数的每一个参数。arguments对象并不是Array的实例，它是一个类数组
+对象，可以使用方括号语法访问它的每一个元素。
 请看以下实例：
+    function add(x) {
+        console.log(arguments[0],arguments[1],arguments[2]);
+        return x + 1;
+    }
+    add(1,2,3);//1,2,3
+arguments对象的length属性显示实参的个数。函数的length属性显示形参的个数。
+    function add(x,y) {
+        console.log(arguments.length);//3
+        return x + 1;
+    }
+    add(1,2,3);
+    console.log(add.length);//2
+形参只是提供便利，但不是必须的
+    function add(){
+        return arguments[0] + arguments[1];
+    }
+    console.log(add(1,2));//3
+
+ECMAScript中所有函数的参数都是按值传递的。就像把值从一个变量复制到另一个变量一样。（单独分析）
 
 

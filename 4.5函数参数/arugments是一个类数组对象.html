@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>arguments是一个类数组对象</title>
+</head>
+<body>
+<script>
+    function add(x,y) {
+        console.log(arguments.length);//3
+        return x + 1;
+    }
+    add(1,2,3);
+    console.log(add.length);//2
+
+
+</script>
+</body>
+</html>
