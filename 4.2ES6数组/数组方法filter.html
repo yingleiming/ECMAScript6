@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组方法filter</title>
+</head>
+<body>
+
+
+<script>
+    /*场景1
+    * 假定有一个对象数组（A），获取数组中指定类型的对象放到B数组
+    */
+    var products = [
+        {name:"cucumber",type:"vegetable"},
+        {name:"orange",type:"fruit"},
+        {name:"celery",type:"vegetable"},
+        {name:"banana",type:"fruit"}
+    ]
+    //ES5
+    var fruit = [];
+    for(var i=0;i<products.length; i++){
+        if(products[i].type==="fruit"){
+            fruit.push(products[i])
+        }
+    }
+    // console.log(fruit);
+    //ES6
+    var fruitFileter = products.filter(function(product){
+        return product.type === "fruit"
+        // if(product.type==="fruit"){
+        //     return true;
+        // }
+    });
+    // console.log(fruitFileter);
+
+
+    /*场景2
+    * 假定有一个对象数组（A），过滤掉不满足以下条件的对象
+    * 条件：蔬菜 数量大于0 ，价格小于10
+    */
+    var moreproducts = [
+        {name:"cucumber",type:"vegetable",amount:10,price:5.6},
+        {name:"orange",type:"fruit",amount:2,price:6.6},
+        {name:"celery",type:"vegetable",amount:8,price:12.8},
+        {name:"banana",type:"fruit",amount:3,price:6}
+    ]
+
+    var filterProducts=moreproducts.filter(function(product){
+        return product.type==="vegetable"
+        &&product.amount>=0
+        &&product.price<=10;
+    });
+    // console.log(filterProducts)
+
+
+    /*场景3
+    * 假定有一个对象数组（A，B），根据A中id值，过滤掉B数组不符合的数据
+    */
+    var post = {id:2,title:"nation"}
+    var Aarray = [
+        {postId:1,content:"china"},
+        {postId:2,content:"us"},
+        {postId:2,content:"kro"},
+    ]
+
+    // var filterArray = Aarray.filter(function(nation){
+    //     return post.id===nation.postId
+    // })
+    // console.log(filterArray);
+    function contentFilter(post,Aarray){
+        return Aarray.filter(function(array){
+            return array.postId === post.id;
+        })
+    }
+    console.log(contentFilter(post,Aarray));
+
+
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
