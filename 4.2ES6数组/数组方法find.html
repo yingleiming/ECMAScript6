@@ -42,6 +42,20 @@
     * 场景二
     * 假定有一个对象数组（A）,根据指定对象的条件找到数组中符合条件的对象
     * */
+    var posts = [
+        {id:1,title:"Node.js"},
+        {id:2,title:"React.js"},
+    ]
+    var comment = {postId:1,content:"Hello world"};
+
+    function postForComment(posts,comment) {
+        return posts.find(function (post) {
+            return post.id === comment.postId;
+        })
+    }
+
+    console.log(postForComment(posts,comment));
+
 </script>
 </body>
 </html>
